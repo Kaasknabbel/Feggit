@@ -19,9 +19,11 @@ client.on('message', message => {
         case "ping":
             message.channel.sendMessage('Pong!');
             break;
-        case "WhatIsRonnie":
+        case "what is ronnie":
             message.channel.sendMessage('/tts Ronnie is a feggit');
             break;
+        case "play":
+            
         default:
             message.channel.sendMessage('Invalid command, feggit');
     }

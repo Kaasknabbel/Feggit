@@ -35,7 +35,7 @@ client.on('message', message => {
             message.channel.sendMessage('Pong!');
             break;
         case "whatisronnie":
-            message.channel.sendMessage('/tts Ronnie is a feggit');
+            message.channel.sendMessage('Ronnie is a feggit');
             break;
         case "play":
             if (!args[1]) {
@@ -56,9 +56,10 @@ client.on('message', message => {
             
             server.queue.push(args[1]);
             
-            if (!message.guild.voiceConnection) message.member.joinvoiceChannel.then(function(connection) {
+            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
                 play(connection, message);
             });
+            message.channel.sendMessage('I make it to the end <3');
             break;
         case "skip":
             var server = servers[message.client.id];

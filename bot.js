@@ -19,7 +19,7 @@ client.on('message', message => {
         case "ping":
             message.channel.sendMessage('Pong!');
             break;
-        case "Tell me a story":
+        case "WhatIsRonnie":
             message.channel.sendMessage('/tts Ronnie is a feggit');
             break;
     }

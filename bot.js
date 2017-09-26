@@ -22,6 +22,8 @@ client.on('message', message => {
         case "WhatIsRonnie":
             message.channel.sendMessage('/tts Ronnie is a feggit');
             break;
+        default:
+            message.channel.sendMessage('Invalid command, feggit');
     }
 });
 

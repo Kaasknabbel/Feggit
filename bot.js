@@ -54,9 +54,21 @@ client.on('message', message => {
             
             var server = servers[message.guild.id];
             
+            server.queue.push(args[1]);
+            
             if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
                 play(connection, message);
             });
+            break;
+        case "skip":
+            var server = servers[message.client.id];
+            
+            if (server.dispatcher) server.dispatcher.end();
+            break;
+        case "stop":
+            var server = servers[message.client.id];
+            
+            if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
             break;
         default:
             message.channel.sendMessage('Invalid command, feggit');

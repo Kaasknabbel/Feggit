@@ -56,7 +56,7 @@ client.on('message', message => {
             
             server.queue.push(args[1]);
             
-            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection => {
                 play(connection, message);
             });
             message.channel.sendMessage('I make it to the end <3');

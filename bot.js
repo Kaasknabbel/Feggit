@@ -13,14 +13,15 @@ client.on('message', message => {
     
     if (!message.content.startsWith(PREFIX)) return;
     
-    if (message.content === 'ping') {
-      message.reply('pong');
-    }
-});
-
-client.on('message', message => {
-    if (message.content === 'Tell me a story') {
-      message.channel.sendMessage('Ronnie is a feggit');
+    var args = message.content.substring(PREFIX.length).split(" ");
+    
+    switch (args[0].toLowerCase()) {
+        case "ping":
+            message.channel.sendMessage('Pong!');
+            break;
+        case "Tell me a story":
+            message.channel.sendMessage('/tts Ronnie is a feggit');
+            break;
     }
 });
 

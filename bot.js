@@ -11,4 +11,10 @@ client.on('message', message => {
     }
 });
 
+client.on('message', message => {
+    if (message.content === 'Tell me a story') {
+      message.reply('Ronnie is a feggit');
+    }
+});
+
 client.login(process.env.BOT_TOKEN);

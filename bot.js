@@ -1,28 +1,52 @@
 const Discord = require('discord.js');
-const YTDL = require('ytdl-core');
 
 const client = new Discord.Client();
 const PREFIX = "!";
 
 var servers = {};
-
-function play(connection, message) {
-    var server = servers[message.guild.id];
-    
-    server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
-    
-    server.queue.shift();
-    
-    server.dispatcher.on("end", function() {
-        if (server.queue[0]) play(connection, message);
-        else connection.disconnect();
-    });
-    message.channel.sendMessage('I make it to the end of function play() <3');
-}
+var exports = {};
 
 client.on('ready', () => {
     console.log('I am a feggit!');
 });
+
+module.exports = Queue = function() {
+  var vm = this;
+
+  vm.queue = [];
+  vm.currentDispatcher = undefined;
+}
+
+Queue.prototype.play = function(message) {
+  var vm = this;
+  var channel = getAuthorVoiceChannel(message);
+
+  if (!channel) {
+    vm.queue = [];
+    return message.reply('You are not in a voice channel.');
+  }
+
+  var toPlay = vm.queue[0];
+  if (!toPlay) {
+    return message.reply('No songs in queue.');
+  }
+
+  channel.join().then(connection => {
+    var stream = toPlay.stream();
+
+    vm.currentDispatcher = connection.playStream(stream, {
+      seek: 0,
+      volume: 0.5
+    });
+
+    vm.currentDispatcher.on('end', event => {
+      vm.remove(message);
+    });
+
+    vm.currentDispatcher.on('error', err => {
+      vm.remove(message);
+    });
+}
 
 client.on('message', message => {
     if (message.author.equals(client.user)) return;
@@ -52,16 +76,7 @@ client.on('message', message => {
                 return;
             };
             
-            if (!servers[message.guild.id]) servers[message.guild.id] = {
-                queue: []
-            };
-            
-            var server = servers[message.guild.id];
-            
-            server.queue.push(args[1]);
-  
-            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection =>
-                play(connection, message));
+            this.play(message);
             break;
         case "skip":
             var server = servers[message.client.id];

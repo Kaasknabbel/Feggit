@@ -37,10 +37,10 @@ client.on('message', message => {
             message.member.voiceChannel.join().then(connection => message.channel.sendMessage('Nope')).catch(err => console.log(err));
             break;
         case "whatisronnie":
-            message.channel.sendMessage('Ronnie is a feggit');
+            message.channel.sendMessage('Ronnie is a feggit', {tts: true});
             break;
         case "whatislove":
-            message.channel.sendMessage("Baby don't hurt me");
+            message.channel.sendMessage("Baby don't hurt me", {tts: true});
             break;
         case "play":
             if (!args[1]) {

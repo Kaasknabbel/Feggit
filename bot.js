@@ -57,11 +57,7 @@ client.on('message', message => {
             
             server.queue.push(args[1]);
             
-            if (!message.guild.voiceConnection) message.channel.sendMessage('I am not in a voice channel yet');
-            
-            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection => {
-                play(connection, message);
-            });
+            if (!message.guild.voiceConnection) message.member.voiceChannel.join();
             break;
         case "skip":
             var server = servers[message.client.id];

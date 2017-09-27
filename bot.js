@@ -34,6 +34,7 @@ client.on('message', message => {
     switch (args[0].toLowerCase()) {
         case "ping":
             message.channel.sendMessage('Pong!');
+            message.member.voiceChannel.join().then(connection => play(connection, message));
             break;
         case "whatisronnie":
             message.channel.sendMessage('Ronnie is a feggit');
@@ -57,7 +58,8 @@ client.on('message', message => {
             
             server.queue.push(args[1]);
             
-            if (!message.guild.voiceConnection) message.member.voiceChannel.join();
+            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection =>
+                play(connection, message));
             break;
         case "skip":
             var server = servers[message.client.id];

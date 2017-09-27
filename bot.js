@@ -17,6 +17,7 @@ function play(connection, message) {
         if (server.queue[0]) play(connection, message);
         else connection.disconnect();
     });
+    message.channel.sendMessage('I make it to the end of function play() <3');
 }
 
 client.on('ready', () => {
@@ -58,7 +59,6 @@ client.on('message', message => {
             
             if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection => {
                 play(connection, message);
-                message.channel.sendMessage('I make it to the end <3');
             });
             break;
         case "skip":

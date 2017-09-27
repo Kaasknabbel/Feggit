@@ -49,6 +49,8 @@ client.on('message', message => {
                 return;
             }
             
+            if (!message.guild.voiceConnection) message.channel.sendMessage('I am not in a voice channel yet');
+            
             if (!servers[message.guild.id]) servers[message.guild.id] = {
                 queue: []
             };

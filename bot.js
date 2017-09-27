@@ -34,13 +34,13 @@ client.on('message', message => {
     switch (args[0].toLowerCase()) {
         case "ping":
             message.channel.sendMessage('Pong!');
-            message.member.voiceChannel.join().then(connection => message.channel.sendMessage('Nope'));
+            message.member.voiceChannel.join().then(connection => message.channel.sendMessage('Nope')).catch(err => console.log(err));
             break;
         case "whatisronnie":
-            message.channel.sendMessage('/tts Ronnie is a feggit');
+            message.channel.sendMessage('Ronnie is a feggit');
             break;
         case "whatislove":
-            message.channel.sendMessage("/tts Baby don't hurt me");
+            message.channel.sendMessage("Baby don't hurt me");
             break;
         case "play":
             if (!args[1]) {
@@ -62,7 +62,7 @@ client.on('message', message => {
             server.queue.push(args[1]);
             
             if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection =>
-                play(connection, message));
+                play(connection, message)).catch(err => console.log(err));
             break;
         case "skip":
             var server = servers[message.client.id];

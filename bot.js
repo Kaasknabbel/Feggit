@@ -57,11 +57,11 @@ client.on('message', message => {
             };
             
             var server = servers[message.guild.id];
+            var channel = message.sender.voiceChannel;
             
             server.queue.push(args[1]);
   
-            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection =>
-                play(connection, message));
+            if (!message.guild.voiceConnection) client.joinVoiceChannel(channel, connection => play(connection, message));
             break;
         case "skip":
             var server = servers[message.client.id];

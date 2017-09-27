@@ -42,14 +42,12 @@ client.on('message', message => {
             if (!args[1]) {
                 message.channel.sendMessage('Please provide a link, feggit');
                 return;
-            }
+            };
             
             if (!message.member.voiceChannel) {
                 message.channel.sendMessage('You must be in a voicechannel, feggit');
                 return;
-            }
-            
-            if (!message.guild.voiceConnection) message.channel.sendMessage('I am not in a voice channel yet');
+            };
             
             if (!servers[message.guild.id]) servers[message.guild.id] = {
                 queue: []
@@ -58,6 +56,8 @@ client.on('message', message => {
             var server = servers[message.guild.id];
             
             server.queue.push(args[1]);
+            
+            if (!message.guild.voiceConnection) message.channel.sendMessage('I am not in a voice channel yet');
             
             if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection => {
                 play(connection, message);

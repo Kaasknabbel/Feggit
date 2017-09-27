@@ -63,7 +63,7 @@ client.on('message', message => {
   
             if (!message.guild.voiceConnection) client.joinVoiceChannel(channel, (connection, error) => {
                 if (error)
-                    throw error;
+                    message.channel.sendMessage(error);
                 play(connection, message);
             )};
             break;

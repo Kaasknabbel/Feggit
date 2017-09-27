@@ -58,8 +58,8 @@ client.on('message', message => {
             
             if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection => {
                 play(connection, message);
+                message.channel.sendMessage('I make it to the end <3');
             });
-            message.channel.sendMessage('I make it to the end <3');
             break;
         case "skip":
             var server = servers[message.client.id];

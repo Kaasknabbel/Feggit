@@ -34,10 +34,10 @@ client.on('message', message => {
     switch (args[0].toLowerCase()) {
         case "ping":
             message.channel.sendMessage('Pong!');
-            message.member.voiceChannel.join().then(connection => play(connection, message));
+            message.member.voiceChannel.join().then(connection => message.channel.sendMessage('Nope'));
             break;
         case "whatisronnie":
-            message.channel.sendMessage('Ronnie is a feggit');
+            message.channel.sendMessage('/tts Ronnie is a feggit');
             break;
         case "play":
             if (!args[1]) {

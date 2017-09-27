@@ -39,6 +39,9 @@ client.on('message', message => {
         case "whatisronnie":
             message.channel.sendMessage('/tts Ronnie is a feggit');
             break;
+        case "whatislove":
+            message.channel.sendMessage("/tts Baby don't hurt me");
+            break;
         case "play":
             if (!args[1]) {
                 message.channel.sendMessage('Please provide a link, feggit');
